@@ -58,3 +58,107 @@ def add_audio_features(df, audio_features_df):
     df_final = pd.concat([df.reset_index(), audio_features_df], axis=1)
     df_final.drop(columns=['index', 'id'], inplace=True)
     return df_final
+
+def isin_hot(df, title, artist):
+    
+    if ( (df['dataset']== "H") and (df['title'] == title) and (df['artist']==artist) ):
+        return True
+    else: 
+        return False
+    
+def get_user_song():
+    
+    title = input("Please, tell me the title of a song you like: " )
+    artist = input("Please tell me the artist: ")
+    
+    return title, artist
+
+def search_song_id_user(df):
+    
+    song_ids = []
+    
+    #for number in range(0,len(df)):
+        
+    for index in list(range(len(df))):
+            artist = df.iloc[index,1] 
+            title = df.iloc[index,0]
+            try:
+                results = sp.search(q="track:"+title+" artist:"+artist,limit=1)
+                song_id = results['tracks']['items'][0]['id']
+                song_ids.append(song_id)
+            except:
+                print("We cannot guess with this song!".format(song_id))         
+                song_ids.append(np.nan)
+                
+    song_ids = pd.DataFrame(song_ids)
+    return song_ids
+
+def search_song_id_user(df):
+    
+    artist = df.iloc[index,1] 
+    title = df.iloc[index,0]
+    
+    try:
+        results = sp.search(q="track:"+title,limit=5)
+        song_id = results['tracks']['items'][0]['id']
+    except:
+        print("We cannot guess with this song!".format(song_id))         
+        song_id = (np.nan)
+                
+    return pd.DataFrame(song_id)
+
+def search_song_id_user(df):
+    
+    artist = df.iloc[index,1] 
+    title = df.iloc[index,0]
+    
+    try:
+        results = sp.search(q="track:"+title,limit=5)
+        song_id = results['tracks']['items'][0]['id']
+    except:
+        print("We cannot guess with this song!".format(song_id))         
+        song_id = (np.nan)
+                
+    return pd.DataFrame(song_id)
+
+def search_song_id_user(df):
+    
+    artist = df.iloc[index,1] 
+    title = df.iloc[index,0]
+    
+    try:
+        results = sp.search(q="track:"+title,limit=5)
+        song_id = results['tracks']['items'][0]['id']
+    except:
+        print("We cannot guess with this song!".format(song_id))         
+        song_id = (np.nan)
+                
+    return pd.DataFrame(song_id)
+
+def isin_hot(df, title, artist):
+    
+    if ( (df['dataset']== "H") and (df['title'] == title) and (df['artist']==artist) ):
+        return True
+    else: 
+        return False
+    
+def get_user_song():
+    
+    title = input("Please, tell me the title of a song you like: " )
+    artist = input("Please tell me the artist: ")
+    
+    return title, artist
+
+def search_song_id_user(df):
+    
+    artist = df.iloc[index,1] 
+    title = df.iloc[index,0]
+    
+    try:
+        results = sp.search(q="track:"+title,limit=5)
+        song_id = results['tracks']['items'][0]['id']
+    except:
+        print("We cannot guess with this song!".format(song_id))         
+        song_id = (np.nan)
+                
+    return pd.DataFrame(song_id)
